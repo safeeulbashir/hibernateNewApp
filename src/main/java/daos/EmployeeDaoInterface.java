@@ -1,6 +1,6 @@
 package daos;
 
-import hiperappPojos.Employee;
+import hiperappEntity.Employee;
 
 public interface EmployeeDaoInterface {
 

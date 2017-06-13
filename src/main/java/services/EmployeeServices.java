@@ -1,25 +1,32 @@
 package services;
 
-import daos.EmployeeDaoImpl;
-import daos.EmployeeDaoInterface;
-import hiperappPojos.Employee;
+import java.io.Serializable;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import hibernate.util.HibernateUtil;
+import hiperappEntity.Address;
+import hiperappEntity.Employee;
+import hiperappEntity.Salary;
 
 public class EmployeeServices {
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
-	public void addEmployee() {
-		Employee employee = new Employee(2, "Safee", "Bashir", 60000, "IT");
-		EmployeeDaoInterface employeeDao = new EmployeeDaoImpl();
-		employeeDao.addEmployee(employee);
-	}
-	public void updateEmployee() {
-		Employee employee = new Employee(2, "Safeeul", "Bashir", 65000, "IT");
-		EmployeeDaoInterface employeeDao = new EmployeeDaoImpl();
-		employeeDao.updateEmployee(employee);
-	}
-	public Employee findEmployee(Integer employeeId)
-	{
-		EmployeeDaoInterface employeeDao = new EmployeeDaoImpl();
-		return employeeDao.findEmployee(employeeId);
+	public void addRecords(Employee employee, Salary salary, Address address) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		try {
+			Serializable emp = session.save(employee);
+			transaction.commit();
+		} catch (Exception exception) {
+			// TODO: handle exception
+			transaction.rollback();
+			exception.printStackTrace();
+		}
+		session.close();
 	}
 
 }

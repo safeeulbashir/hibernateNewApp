@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import hibernate.util.HibernateUtil;
-import hiperappPojos.Employee;
+import hiperappEntity.Employee;
 
 public class EmployeeDaoImpl implements EmployeeDaoInterface {
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
